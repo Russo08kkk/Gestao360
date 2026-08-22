@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meu Controle Financeiro</title>
+<style>
+:root{--navy:#17212b;--blue:#175cd3;--green:#16803c;--red:#d92d20;--gold:#f2b705;--bg:#f4f6f8;--card:#fff;--text:#17212b;--muted:#667085;--line:#e4e7ec}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:var(--text)}
+header{background:var(--navy);color:#fff;padding:18px 4%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:22px}header small{opacity:.8}
+nav{background:#fff;border-bottom:1px solid var(--line);display:flex;gap:4px;padding:8px 4%;overflow:auto;position:sticky;top:62px;z-index:4}
+nav button{background:transparent;color:var(--muted);border:0;padding:11px 14px;border-radius:8px;white-space:nowrap;cursor:pointer}
+nav button.active,nav button:hover{background:#eef4ff;color:var(--blue);font-weight:bold}
+main{max-width:1250px;margin:24px auto;padding:0 18px}.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px}.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 2px 10px #0000000b}.card small{color:var(--muted)}.card strong{display:block;font-size:21px;margin-top:7px}.green{color:var(--green)}.red{color:var(--red)}.blue{color:var(--blue)}.gold{color:#9a6d00}
+.panel{background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 10px #0000000b;margin-bottom:18px}
+.panel h2{margin-top:0;font-size:18px}
+.form{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+input,select,button{font:inherit;padding:10px;border:1px solid #d0d5dd;border-radius:8px;background:#fff}
+.primary{background:var(--blue);color:#fff;border-color:var(--blue);cursor:pointer}.danger{background:var(--red);color:#fff;border:0;cursor:pointer}.secondary{background:#eef4ff;color:var(--blue);border:0;cursor:pointer}
+table{width:100%;border-collapse:collapse}th,td{padding:11px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}th{background:#f9fafb}
+.tablewrap{overflow:auto}.pill{padding:4px 8px;border-radius:20px;background:#eef4ff;color:var(--blue);font-size:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.progress{height:12px;background:#eaecf0;border-radius:20px;overflow:hidden}.progress div{height:100%;background:var(--blue)}
+.big{font-size:30px;font-weight:bold}.hint{color:var(--muted);font-size:13px}.empty{text-align:center;color:var(--muted);padding:30px}
+canvas{max-width:100%}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}}
+@media(max-width:520px){.cards{grid-template-columns:1fr}.form{grid-template-columns:1fr}header small{display:none}}
+</style>
+</head>
+<body>
+<header><h1>💰 Meu Controle Financeiro</h1><small>Seu sistema financeiro pessoal</small></header>
+<nav id="nav">
+<button class="active" onclick="aba('dashboard',this)">📊 Dashboard</button>
+<button onclick="aba('lancamentos',this)">💸 Lançamentos</button>
+<button onclick="aba('cartao',this)">💳 Cartão</button>
+<button onclick="aba('investimentos',this)">📈 Rendimentos</button>
+<button onclick="aba('metas',this)">🎯 Metas</button>
+<button onclick="aba('categorias',this)">🏷️ Categorias</button>
+</nav>
+
+<main>
+<section id="dashboard" class="page active">
+<div class="cards">
+<div class="card"><small>Receitas</small><strong class="green" id="dRec">R$ 0,00</strong></div>
+<div class="card"><small>Despesas</small><strong class="red" id="dDesp">R$ 0,00</strong></div>
+<div class="card"><small>Investimentos</small><strong class="blue" id="dInv">R$ 0,00</strong></div>
+<div class="card"><small>Rendimentos</small><strong class="gold" id="dRend">R$ 0,00</strong></div>
+<div class="card"><small>Saldo</small><strong class="blue" id="dSaldo">R$ 0,00</strong></div>
+</div>
+<div class="grid2">
+<div class="panel"><h2>Resumo mensal</h2><div class="tablewrap"><table><thead><tr><th>Mês</th><th>Receitas</th><th>Despesas</th><th>Invest.</th><th>Saldo</th></tr></thead><tbody id="meses"></tbody></table></div></div>
+<div class="panel"><h2>Gastos por categoria</h2><div id="categoriasGrafico"></div></div>
+</div>
+<div class="panel"><h2>Saúde financeira</h2><div class="grid3">
+<div><span class="hint">Taxa de economia</span><div class="big" id="economia">0%</div></div>
+<div><span class="hint">Total de lançamentos</span><div class="big" id="qtd">0</div></div>
+<div><span class="hint">Maior categoria</span><div class="big" id="maiorCat">—</div></div>
+</div></div>
+</section>
+
+<section id="lancamentos" class="page">
+<div class="panel"><h2>Novo lançamento</h2>
+<div class="form">
+<input id="lData" type="date"><input id="lDesc" placeholder="Descrição">
+<select id="lCat"></select><select id="lTipo"><option>Despesa</option><option>Receita</option><option>Investimento</option><option>Rendimento</option></select>
+<select id="lPag"><option>PIX</option><option>Dinheiro</option><option>Cartão</option><option>Boleto</option><option>Transferência</option><option>Débito</option><option>Outro</option></select>
+<input id="lValor" type="number" step=".01" placeholder="Valor (R$)">
+<button class="primary" onclick="addLanc()">Adicionar</button>
+</div></div>
+<div class="panel"><h2>Histórico</h2><div class="tablewrap"><table><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Tipo</th><th>Pagamento</th><th>Valor</th><th></th></tr></thead><tbody id="lTabela"></tbody></table></div></div>
+</section>
+
+<section id="cartao" class="page">
+<div class="panel"><h2>💳 Controle de cartão</h2><div class="form">
+<input id="cData" type="date"><input id="cDesc" placeholder="Compra"><select id="cCat"></select>
+<input id="cTotal" type="number" step=".01" placeholder="Valor total"><input id="cParcelas" type="number" min="1" value="1" placeholder="Parcelas">
+<input id="cVenc" type="date"><button class="primary" onclick="addCartao()">Adicionar compra</button>
+</div></div>
+<div class="panel"><div class="tablewrap"><table><thead><tr><th>Data</th><th>Compra</th><th>Categoria</th><th>Total</th><th>Parcelas</th><th>Valor parcela</th><th>Vencimento</th><th>Pago?</th><th></th></tr></thead><tbody id="cTabela"></tbody></table></div></div>
+</section>
+
+<section id="investimentos" class="page">
+<div class="panel"><h2>📈 Simulador de juros compostos</h2><div class="grid3">
+<div><label>Valor inicial</label><input id="sInicial" type="number" value="1000" step=".01"></div>
+<div><label>Aporte mensal</label><input id="sAporte" type="number" value="300" step=".01"></div>
+<div><label>Rendimento mensal (%)</label><input id="sTaxa" type="number" value="1" step=".01"></div>
+<div><label>Período (meses)</label><input id="sMeses" type="number" value="24" min="1"></div>
+</div><br><button class="primary" onclick="simular()">Calcular rendimento</button>
+<div class="grid3" style="margin-top:18px"><div class="card"><small>Total aportado</small><strong id="sAportado">R$ 0,00</strong></div><div class="card"><small>Rendimento</small><strong class="green" id="sRendimento">R$ 0,00</strong></div><div class="card"><small>Valor final</small><strong class="blue" id="sFinal">R$ 0,00</strong></div></div></div>
+<div class="panel"><h2>Evolução</h2><div class="tablewrap"><table><thead><tr><th>Mês</th><th>Saldo</th><th>Aportes</th><th>Rendimento acumulado</th></tr></thead><tbody id="sTabela"></tbody></table></div></div>
+</section>
+
+<section id="metas" class="page">
+<div class="panel"><h2>🎯 Nova meta financeira</h2><div class="form">
+<input id="mNome" placeholder="Ex.: Comprar notebook"><input id="mObjetivo" type="number" step=".01" placeholder="Valor objetivo">
+<input id="mAtual" type="number" step=".01" placeholder="Valor atual"><button class="primary" onclick="addMeta()">Adicionar meta</button>
+</div></div>
+<div class="panel"><div id="metasLista"></div></div>
+</section>
+
+<section id="categorias" class="page">
+<div class="panel"><h2>🏷️ Limites por categoria</h2><p class="hint">Defina um limite mensal. O sistema compara com suas despesas registradas.</p>
+<div class="tablewrap"><table><thead><tr><th>Categoria</th><th>Limite mensal</th><th>Gasto atual</th><th>Status</th></tr></thead><tbody id="catTabela"></tbody></table></div></div>
+</section>
+</main>
+
+<script>
+const categorias=["Alimentação","Transporte","Casa","Lazer","Educação","Saúde","Assinaturas","Investimentos","Salário","Outros"];
+let db=JSON.parse(localStorage.getItem("finDB")||'{"lanc":[],"cartao":[],"metas":[],"limites":{}}');
+const brl=n=>(Number(n)||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+function save(){localStorage.setItem("finDB",JSON.stringify(db));renderAll()}
+function fillCats(){["lCat","cCat"].forEach(id=>document.getElementById(id).innerHTML=categorias.map(x=>`<option>${x}</option>`).join(""))}
+function aba(id,btn){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");}
+function addLanc(){
+ const v=+lValor.value;if(!lDesc.value||!v)return alert("Informe descrição e valor.");
+ db.lanc.push({data:lData.value||new Date().toISOString().slice(0,10),desc:lDesc.value,cat:lCat.value,tipo:lTipo.value,pag:lPag.value,v});
+ lDesc.value="";lValor.value="";save();
+}
+function delLanc(i){db.lanc.splice(i,1);save()}
+function addCartao(){let total=+cTotal.value, p=+cParcelas.value;if(!cDesc.value||!total||!p)return alert("Preencha os dados da compra.");db.cartao.push({data:cData.value,desc:cDesc.value,cat:cCat.value,total,p,venc:cVenc.value,pago:false});cDesc.value="";cTotal.value="";save()}
+function delCartao(i){db.cartao.splice(i,1);save()}
+function togglePago(i){db.cartao[i].pago=!db.cartao[i].pago;save()}
+function addMeta(){let obj=+mObjetivo.value,at=+mAtual.value;if(!mNome.value||!obj)return alert("Informe o nome e valor objetivo.");db.metas.push({nome:mNome.value,obj,at});mNome.value="";mObjetivo.value="";mAtual.value="";save()}
+function delMeta(i){db.metas.splice(i,1);save()}
+function setLimite(i,v){db.limites[categorias[i]]=+v||0;save()}
+function simular(){
+ let inicial=+sInicial.value||0, aporte=+sAporte.value||0, taxa=(+sTaxa.value||0)/100, n=+sMeses.value||1, saldo=inicial, aportado=inicial, rows="";
+ for(let i=1;i<=n;i++){let rend=saldo*taxa;saldo+=rend+aporte;aportado+=aporte;rows+=`<tr><td>${i}</td><td>${brl(saldo)}</td><td>${brl(aportado)}</td><td>${brl(saldo-aportado)}</td></tr>`}
+ sAportado.textContent=brl(aportado);sRendimento.textContent=brl(saldo-aportado);sFinal.textContent=brl(saldo);sTabela.innerHTML=rows;
+}
+function renderAll(){
+ let rec=sum("Receita"),desp=sum("Despesa"),inv=sum("Investimento"),rend=sum("Rendimento");
+ dRec.textContent=brl(rec);dDesp.textContent=brl(desp);dInv.textContent=brl(inv);dRend.textContent=brl(rend);dSaldo.textContent=brl(rec-desp-inv+rend);
+ economia.textContent=(rec?((rec-desp)/rec*100):0).toFixed(1)+"%";qtd.textContent=db.lanc.length;
+ let cats={};db.lanc.filter(x=>x.tipo==="Despesa").forEach(x=>cats[x.cat]=(cats[x.cat]||0)+x.v);
+ let top=Object.entries(cats).sort((a,b)=>b[1]-a[1])[0];maiorCat.textContent=top?top[0]:"—";
+ categoriasGrafico.innerHTML=Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><span>${esc(k)}</span><b>${brl(v)}</b></div><div class="progress"><div style="width:${top?Math.min(100,v/top[1]*100):0}%"></div></div></div>`).join("")||'<div class="empty">Nenhuma despesa cadastrada.</div>';
+ const now=new Date().getFullYear();let mt=Array.from({length:12},(_,i)=>new Date(now,i,1).toLocaleString("pt-BR",{month:"long"}));
+ meses.innerHTML=mt.map((m,i)=>{let a=db.lanc.filter(x=>x.data&&+x.data.slice(0,4)===now&&+x.data.slice(5,7)===i+1);let r=a.filter(x=>x.tipo==="Receita").reduce((s,x)=>s+x.v,0),d=a.filter(x=>x.tipo==="Despesa").reduce((s,x)=>s+x.v,0),iv=a.filter(x=>x.tipo==="Investimento").reduce((s,x)=>s+x.v,0);return `<tr><td style="text-transform:capitalize">${m}</td><td>${brl(r)}</td><td>${brl(d)}</td><td>${brl(iv)}</td><td>${brl(r-d-iv)}</td></tr>`}).join("");
+ lTabela.innerHTML=db.lanc.slice().reverse().map((x,ri)=>{let i=db.lanc.length-1-ri;return `<tr><td>${x.data?x.data.split("-").reverse().join("/"): ""}</td><td>${esc(x.desc)}</td><td>${esc(x.cat)}</td><td><span class="pill">${x.tipo}</span></td><td>${esc(x.pag)}</td><td>${brl(x.v)}</td><td><button class="danger" onclick="delLanc(${i})">Excluir</button></td></tr>`}).join("")||'<tr><td colspan="7" class="empty">Nenhum lançamento.</td></tr>';
+ cTabela.innerHTML=db.cartao.map((x,i)=>`<tr><td>${x.data?x.data.split("-").reverse().join("/"): ""}</td><td>${esc(x.desc)}</td><td>${esc(x.cat)}</td><td>${brl(x.total)}</td><td>${x.p}</td><td>${brl(x.total/x.p)}</td><td>${x.venc?x.venc.split("-").reverse().join("/"): ""}</td><td><button class="secondary" onclick="togglePago(${i})">${x.pago?"Pago":"Pendente"}</button></td><td><button class="danger" onclick="delCartao(${i})">Excluir</button></td></tr>`).join("")||'<tr><td colspan="9" class="empty">Nenhuma compra cadastrada.</td></tr>';
+ metasLista.innerHTML=db.metas.map((x,i)=>{let pct=Math.min(100,x.obj?x.at/x.obj*100:0);return `<div class="panel"><div style="display:flex;justify-content:space-between"><b>${esc(x.nome)}</b><button class="danger" onclick="delMeta(${i})">Excluir</button></div><p>${brl(x.at)} de ${brl(x.obj)} — ${pct.toFixed(1)}%</p><div class="progress"><div style="width:${pct}%"></div></div><p class="hint">Faltam ${brl(Math.max(0,x.obj-x.at))}</p></div>`}).join("")||'<div class="empty">Nenhuma meta cadastrada.</div>';
+ catTabela.innerHTML=categorias.map((c,i)=>{let gasto=db.lanc.filter(x=>x.tipo==="Despesa"&&x.cat===c).reduce((s,x)=>s+x.v,0),lim=db.limites[c]||0,ok=!lim||gasto<=lim;return `<tr><td>${c}</td><td><input type="number" step=".01" value="${lim}" onchange="setLimite(${i},this.value)"></td><td>${brl(gasto)}</td><td style="font-weight:bold;color:${ok?"#16803c":"#d92d20"}">${lim?(ok?"Dentro do limite":"ULTRAPASSADO"):"Sem limite"}</td></tr>`}).join("");
+}
+function sum(tipo){return db.lanc.filter(x=>x.tipo===tipo).reduce((s,x)=>s+x.v,0)}
+fillCats();renderAll();simular();
+</script>
+</body>
+</html>
