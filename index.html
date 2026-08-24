@@ -7,6 +7,7 @@
 <title>Gestão360 — Gestão Financeira</title>
 
 <style>
+
 :root{
     --azul:#1769aa;
     --azul-escuro:#102a43;
@@ -32,10 +33,12 @@ body{
     color:#17212b;
 }
 
-/* ================= HEADER ================= */
+/* =====================================================
+                    CABEÇALHO
+===================================================== */
 
 header{
-    height:76px;
+    min-height:76px;
     background:linear-gradient(135deg,#0d2034,#16466d);
     color:white;
     display:flex;
@@ -52,12 +55,15 @@ header{
     display:flex;
     align-items:center;
     gap:12px;
+    min-width:0;
 }
 
 .logo-area img{
-    width:170px;
-    height:52px;
+    width:150px;
+    height:auto;
+    max-height:55px;
     object-fit:contain;
+    display:block;
 }
 
 .logo-text h1{
@@ -70,7 +76,9 @@ header{
     opacity:.75;
 }
 
-/* ================= MENU ================= */
+/* =====================================================
+                    MENU
+===================================================== */
 
 nav{
     background:white;
@@ -104,7 +112,9 @@ nav button.active{
     background:#eaf3ff;
 }
 
-/* ================= CONTEÚDO ================= */
+/* =====================================================
+                    CONTEÚDO
+===================================================== */
 
 main{
     max-width:1400px;
@@ -120,7 +130,9 @@ main{
     display:block;
 }
 
-/* ================= CARDS ================= */
+/* =====================================================
+                    CARDS
+===================================================== */
 
 .cards{
     display:grid;
@@ -147,7 +159,9 @@ main{
     font-size:21px;
 }
 
-/* ================= PAINÉIS ================= */
+/* =====================================================
+                    PAINÉIS
+===================================================== */
 
 .panel{
     background:white;
@@ -173,8 +187,6 @@ main{
     grid-template-columns:repeat(3,1fr);
     gap:15px;
 }
-
-/* ================= CORES ================= */
 
 .dashboard-panel{
     border-top:3px solid var(--azul);
@@ -208,7 +220,9 @@ main{
     border-top:3px solid #168b91;
 }
 
-/* ================= FORMULÁRIOS ================= */
+/* =====================================================
+                    FORMULÁRIOS
+===================================================== */
 
 .form{
     display:grid;
@@ -236,7 +250,9 @@ select:focus{
     border-color:var(--azul);
 }
 
-/* ================= BOTÕES ================= */
+/* =====================================================
+                    BOTÕES
+===================================================== */
 
 button{
     padding:10px 13px;
@@ -292,7 +308,9 @@ button:hover{
     border:0;
 }
 
-/* ================= TABELAS ================= */
+/* =====================================================
+                    TABELAS
+===================================================== */
 
 .table-wrap{
     overflow:auto;
@@ -315,7 +333,9 @@ th{
     background:#f7f9fc;
 }
 
-/* ================= BARRA ================= */
+/* =====================================================
+                    BARRAS
+===================================================== */
 
 .progress{
     height:12px;
@@ -329,7 +349,9 @@ th{
     background:var(--azul);
 }
 
-/* ================= ALERTAS ================= */
+/* =====================================================
+                    ALERTAS
+===================================================== */
 
 .alert{
     padding:12px;
@@ -386,7 +408,9 @@ th{
     margin-bottom:15px;
 }
 
-/* ================= RESPONSIVO ================= */
+/* =====================================================
+                    RESPONSIVO
+===================================================== */
 
 @media(max-width:1100px){
 
@@ -403,15 +427,30 @@ th{
 @media(max-width:750px){
 
     header{
-        height:auto;
+        min-height:65px;
+        padding:8px 15px;
     }
 
-    header>small{
+    header > small{
         display:none;
     }
 
     .logo-area img{
-        width:130px;
+        width:120px;
+        max-height:45px;
+    }
+
+    .logo-text h1{
+        font-size:18px;
+    }
+
+    .logo-text span{
+        font-size:10px;
+    }
+
+    nav{
+        position:static;
+        padding:7px 10px;
     }
 
     .cards,
@@ -421,18 +460,16 @@ th{
         grid-template-columns:1fr;
     }
 
-    nav{
-        position:static;
-    }
-
 }
+
 </style>
 </head>
+
 
 <body>
 
 <!-- =====================================================
-                     HEADER
+                    CABEÇALHO
 ===================================================== -->
 
 <header>
@@ -440,16 +477,24 @@ th{
     <div class="logo-area">
 
         <!--
-        COLOQUE SUA LOGO NA MESMA PASTA DO HTML
-        Nome do arquivo:
-        logo-gestao360.png
+        IMPORTANTE:
+        Coloque o arquivo da logo na mesma pasta deste index.html
+        Nome recomendado: logo-gestao360.png
         -->
 
-        <img src="logo-gestao360.png" alt="Gestão360">
+        <img
+            src="logo-gestao360.png"
+            alt="Logo Gestão360"
+        >
 
         <div class="logo-text">
+
             <h1>Gestão360</h1>
-            <span>Gestão financeira inteligente</span>
+
+            <span>
+                Gestão financeira inteligente
+            </span>
+
         </div>
 
     </div>
@@ -462,41 +507,49 @@ th{
 
 
 <!-- =====================================================
-                     MENU
+                    MENU
 ===================================================== -->
 
 <nav>
 
-<button class="active"
+<button
+class="active"
 onclick="abrirPagina('dashboard',this)">
 📊 Dashboard
 </button>
 
-<button onclick="abrirPagina('lancamentos',this)">
+<button
+onclick="abrirPagina('lancamentos',this)">
 💸 Lançamentos
 </button>
 
-<button onclick="abrirPagina('pagar',this)">
+<button
+onclick="abrirPagina('pagar',this)">
 📅 Contas a Pagar
 </button>
 
-<button onclick="abrirPagina('contas',this)">
+<button
+onclick="abrirPagina('contas',this)">
 🏦 Minhas Contas
 </button>
 
-<button onclick="abrirPagina('cartao',this)">
+<button
+onclick="abrirPagina('cartao',this)">
 💳 Cartões
 </button>
 
-<button onclick="abrirPagina('investimentos',this)">
+<button
+onclick="abrirPagina('investimentos',this)">
 📈 Investimentos
 </button>
 
-<button onclick="abrirPagina('metas',this)">
+<button
+onclick="abrirPagina('metas',this)">
 🎯 Metas
 </button>
 
-<button onclick="abrirPagina('orcamento',this)">
+<button
+onclick="abrirPagina('orcamento',this)">
 🏷️ Orçamento
 </button>
 
@@ -507,53 +560,106 @@ onclick="abrirPagina('dashboard',this)">
 
 
 <!-- =====================================================
-                     DASHBOARD
+                    DASHBOARD
 ===================================================== -->
 
-<section id="dashboard" class="page active">
+<section
+id="dashboard"
+class="page active">
 
 <div class="cards">
 
 <div class="card">
-<small>Receitas</small>
-<strong id="dashReceitas" style="color:var(--verde)">
+
+<small>
+Receitas
+</small>
+
+<strong
+id="dashReceitas"
+style="color:var(--verde)">
 R$ 0,00
 </strong>
+
 </div>
 
-<div class="card" style="border-color:var(--vermelho)">
-<small>Despesas</small>
-<strong id="dashDespesas" style="color:var(--vermelho)">
+
+<div
+class="card"
+style="border-color:var(--vermelho)">
+
+<small>
+Despesas
+</small>
+
+<strong
+id="dashDespesas"
+style="color:var(--vermelho)">
 R$ 0,00
 </strong>
+
 </div>
 
-<div class="card" style="border-color:var(--roxo)">
-<small>Investimentos</small>
-<strong id="dashInvestimentos" style="color:var(--roxo)">
+
+<div
+class="card"
+style="border-color:var(--roxo)">
+
+<small>
+Investimentos
+</small>
+
+<strong
+id="dashInvestimentos"
+style="color:var(--roxo)">
 R$ 0,00
 </strong>
+
 </div>
 
-<div class="card" style="border-color:var(--laranja)">
-<small>Contas a pagar</small>
-<strong id="dashPagar" style="color:var(--laranja)">
+
+<div
+class="card"
+style="border-color:var(--laranja)">
+
+<small>
+Contas a pagar
+</small>
+
+<strong
+id="dashPagar"
+style="color:var(--laranja)">
 R$ 0,00
 </strong>
+
 </div>
 
-<div class="card" style="border-color:var(--azul-escuro)">
-<small>Patrimônio</small>
+
+<div
+class="card"
+style="border-color:var(--azul-escuro)">
+
+<small>
+Patrimônio
+</small>
+
 <strong id="dashPatrimonio">
 R$ 0,00
 </strong>
+
 </div>
 
+
 <div class="card">
-<small>Saldo</small>
+
+<small>
+Saldo
+</small>
+
 <strong id="dashSaldo">
 R$ 0,00
 </strong>
+
 </div>
 
 </div>
@@ -563,7 +669,9 @@ R$ 0,00
 
 <div class="panel dashboard-panel">
 
-<h2>📊 Resumo financeiro</h2>
+<h2>
+📊 Resumo financeiro
+</h2>
 
 <table>
 
@@ -612,29 +720,54 @@ R$ 0,00
 
 <div class="panel dashboard-panel">
 
-<h2>🎯 Saúde financeira</h2>
+<h2>
+🎯 Saúde financeira
+</h2>
 
 <div class="grid3">
 
 <div>
-<small>Economia</small>
-<div class="big" id="economia">
+
+<small>
+Economia
+</small>
+
+<div
+class="big"
+id="economia">
 0%
 </div>
+
 </div>
 
+
 <div>
-<small>Lançamentos</small>
-<div class="big" id="quantidadeLanc">
+
+<small>
+Lançamentos
+</small>
+
+<div
+class="big"
+id="quantidadeLanc">
 0
 </div>
+
 </div>
 
+
 <div>
-<small>Maior categoria</small>
-<div class="big" id="maiorCategoria">
+
+<small>
+Maior categoria
+</small>
+
+<div
+class="big"
+id="maiorCategoria">
 -
 </div>
+
 </div>
 
 </div>
@@ -648,7 +781,9 @@ R$ 0,00
 
 <div class="panel dashboard-panel">
 
-<h2>📅 Próximos vencimentos</h2>
+<h2>
+📅 Próximos vencimentos
+</h2>
 
 <div id="dashboardAvisos"></div>
 
@@ -657,7 +792,9 @@ R$ 0,00
 
 <div class="panel dashboard-panel">
 
-<h2>📊 Gastos por categoria</h2>
+<h2>
+📊 Gastos por categoria
+</h2>
 
 <div id="graficoCategorias"></div>
 
@@ -668,16 +805,19 @@ R$ 0,00
 </section>
 
 
-
 <!-- =====================================================
-                   LANÇAMENTOS
+                    LANÇAMENTOS
 ===================================================== -->
 
-<section id="lancamentos" class="page">
+<section
+id="lancamentos"
+class="page">
 
 <div class="panel">
 
-<h2>💸 Novo lançamento</h2>
+<h2>
+💸 Novo lançamento
+</h2>
 
 <div class="form">
 
@@ -733,7 +873,9 @@ Adicionar
 
 <div class="panel">
 
-<h2>📋 Histórico</h2>
+<h2>
+📋 Histórico
+</h2>
 
 <div class="toolbar">
 
@@ -803,16 +945,19 @@ Rendimento
 </section>
 
 
-
 <!-- =====================================================
-                 CONTAS A PAGAR
+                CONTAS A PAGAR
 ===================================================== -->
 
-<section id="pagar" class="page">
+<section
+id="pagar"
+class="page">
 
 <div class="panel">
 
-<h2>📅 Cadastrar conta a pagar</h2>
+<h2>
+📅 Cadastrar conta a pagar
+</h2>
 
 <div class="form">
 
@@ -855,7 +1000,9 @@ Adicionar
 
 <div class="panel">
 
-<h2>📋 Contas cadastradas</h2>
+<h2>
+📋 Contas cadastradas
+</h2>
 
 <div class="table-wrap">
 
@@ -888,16 +1035,19 @@ Adicionar
 </section>
 
 
-
 <!-- =====================================================
                     CONTAS
 ===================================================== -->
 
-<section id="contas" class="page">
+<section
+id="contas"
+class="page">
 
 <div class="panel">
 
-<h2>🏦 Adicionar conta</h2>
+<h2>
+🏦 Adicionar conta
+</h2>
 
 <div class="form">
 
@@ -941,7 +1091,9 @@ Adicionar
 
 <div class="panel">
 
-<h2>🏦 Minhas contas</h2>
+<h2>
+🏦 Minhas contas
+</h2>
 
 <div id="listaContas"></div>
 
@@ -950,16 +1102,19 @@ Adicionar
 </section>
 
 
-
 <!-- =====================================================
                     CARTÕES
 ===================================================== -->
 
-<section id="cartao" class="page">
+<section
+id="cartao"
+class="page">
 
 <div class="panel">
 
-<h2>💳 Cadastrar cartão</h2>
+<h2>
+💳 Cadastrar cartão
+</h2>
 
 <div class="form">
 
@@ -1004,7 +1159,9 @@ Adicionar
 
 <div class="panel">
 
-<h2>💳 Meus cartões</h2>
+<h2>
+💳 Meus cartões
+</h2>
 
 <div id="listaCartoes"></div>
 
@@ -1013,7 +1170,9 @@ Adicionar
 
 <div class="panel">
 
-<h2>🛒 Nova compra no cartão</h2>
+<h2>
+🛒 Nova compra no cartão
+</h2>
 
 <div class="form">
 
@@ -1059,7 +1218,9 @@ Adicionar
 
 <div class="panel">
 
-<h2>🧾 Compras</h2>
+<h2>
+🧾 Compras
+</h2>
 
 <div class="table-wrap">
 
@@ -1068,6 +1229,7 @@ Adicionar
 <thead>
 
 <tr>
+
 <th>Cartão</th>
 <th>Compra</th>
 <th>Categoria</th>
@@ -1076,6 +1238,7 @@ Adicionar
 <th>Parcela</th>
 <th>Status</th>
 <th>Ações</th>
+
 </tr>
 
 </thead>
@@ -1091,54 +1254,80 @@ Adicionar
 </section>
 
 
-
 <!-- =====================================================
-                  INVESTIMENTOS
+                    INVESTIMENTOS
 ===================================================== -->
 
-<section id="investimentos" class="page">
+<section
+id="investimentos"
+class="page">
 
 <div class="panel">
 
-<h2>📈 Simulador de juros compostos</h2>
+<h2>
+📈 Simulador de juros compostos
+</h2>
 
 <div class="grid3">
 
 <div>
-<label>Valor inicial</label>
+
+<label>
+Valor inicial
+</label>
+
 <input
 id="simInicial"
 type="number"
 value="1000"
 >
+
 </div>
 
+
 <div>
-<label>Aporte mensal</label>
+
+<label>
+Aporte mensal
+</label>
+
 <input
 id="simAporte"
 type="number"
 value="300"
 >
+
 </div>
 
+
 <div>
-<label>Taxa mensal (%)</label>
+
+<label>
+Taxa mensal (%)
+</label>
+
 <input
 id="simTaxa"
 type="number"
 step="0.01"
 value="1"
 >
+
 </div>
 
+
 <div>
-<label>Período em meses</label>
+
+<label>
+Período em meses
+</label>
+
 <input
 id="simMeses"
 type="number"
 value="24"
 >
+
 </div>
 
 </div>
@@ -1152,11 +1341,15 @@ Calcular rendimento
 </button>
 
 
-<div class="grid3" style="margin-top:20px">
+<div
+class="grid3"
+style="margin-top:20px">
 
 <div class="card">
 
-<small>Total aportado</small>
+<small>
+Total aportado
+</small>
 
 <strong id="simAportado">
 R$ 0,00
@@ -1164,9 +1357,12 @@ R$ 0,00
 
 </div>
 
+
 <div class="card">
 
-<small>Rendimento</small>
+<small>
+Rendimento
+</small>
 
 <strong
 id="simRendimento"
@@ -1176,9 +1372,12 @@ R$ 0,00
 
 </div>
 
+
 <div class="card">
 
-<small>Valor final</small>
+<small>
+Valor final
+</small>
 
 <strong
 id="simFinal"
@@ -1195,7 +1394,9 @@ R$ 0,00
 
 <div class="panel">
 
-<h2>📊 Evolução do investimento</h2>
+<h2>
+📊 Evolução do investimento
+</h2>
 
 <div class="table-wrap">
 
@@ -1204,10 +1405,12 @@ R$ 0,00
 <thead>
 
 <tr>
+
 <th>Mês</th>
 <th>Saldo</th>
 <th>Aportado</th>
 <th>Rendimento acumulado</th>
+
 </tr>
 
 </thead>
@@ -1223,16 +1426,19 @@ R$ 0,00
 </section>
 
 
-
 <!-- =====================================================
-                       METAS
+                    METAS
 ===================================================== -->
 
-<section id="metas" class="page">
+<section
+id="metas"
+class="page">
 
 <div class="panel">
 
-<h2>🎯 Criar meta financeira</h2>
+<h2>
+🎯 Criar meta financeira
+</h2>
 
 <div class="form">
 
@@ -1273,7 +1479,9 @@ Adicionar
 
 <div class="panel">
 
-<h2>🎯 Minhas metas</h2>
+<h2>
+🎯 Minhas metas
+</h2>
 
 <div id="listaMetas"></div>
 
@@ -1282,20 +1490,25 @@ Adicionar
 </section>
 
 
-
 <!-- =====================================================
                     ORÇAMENTO
 ===================================================== -->
 
-<section id="orcamento" class="page">
+<section
+id="orcamento"
+class="page">
 
 <div class="panel">
 
-<h2>🏷️ Orçamento por categoria</h2>
+<h2>
+🏷️ Orçamento por categoria
+</h2>
 
 <p style="color:var(--cinza)">
+
 Defina um limite mensal para cada categoria.
 O Gestão360 compara automaticamente com seus gastos.
+
 </p>
 
 <div class="table-wrap">
@@ -1332,7 +1545,7 @@ O Gestão360 compara automaticamente com seus gastos.
 <script>
 
 /* =====================================================
-                  BANCO DE DADOS
+                    BANCO DE DADOS
 ===================================================== */
 
 let banco =
@@ -1368,7 +1581,7 @@ const categorias = [
 
 
 /* =====================================================
-                    FUNÇÕES
+                    SALVAR
 ===================================================== */
 
 function salvar(){
@@ -1382,6 +1595,10 @@ function salvar(){
 
 }
 
+
+/* =====================================================
+                    DINHEIRO
+===================================================== */
 
 function dinheiro(valor){
 
@@ -1397,9 +1614,15 @@ function dinheiro(valor){
 }
 
 
+/* =====================================================
+                    DATA
+===================================================== */
+
 function dataBR(data){
 
-    if(!data) return "-";
+    if(!data){
+        return "-";
+    }
 
     return data
     .split("-")
@@ -1408,6 +1631,10 @@ function dataBR(data){
 
 }
 
+
+/* =====================================================
+                CATEGORIAS
+===================================================== */
 
 function preencherCategorias(){
 
@@ -1419,12 +1646,16 @@ function preencherCategorias(){
 
     ];
 
+
     campos.forEach(id=>{
 
         const campo =
         document.getElementById(id);
 
-        if(!campo) return;
+        if(!campo){
+            return;
+        }
+
 
         campo.innerHTML =
         categorias
@@ -1438,13 +1669,19 @@ function preencherCategorias(){
 }
 
 
+/* =====================================================
+                    NAVEGAÇÃO
+===================================================== */
+
 function abrirPagina(id,botao){
 
     document
     .querySelectorAll(".page")
     .forEach(
-        pagina=>pagina.classList.remove("active")
+        pagina=>
+        pagina.classList.remove("active")
     );
+
 
     document
     .getElementById(id)
@@ -1454,8 +1691,10 @@ function abrirPagina(id,botao){
     document
     .querySelectorAll("nav button")
     .forEach(
-        b=>b.classList.remove("active")
+        b=>
+        b.classList.remove("active")
     );
+
 
     botao.classList.add("active");
 
@@ -1463,20 +1702,31 @@ function abrirPagina(id,botao){
 
 
 /* =====================================================
-                    LANÇAMENTOS
+                  LANÇAMENTOS
 ===================================================== */
 
 function adicionarLancamento(){
 
     const descricao =
-    lanDescricao.value.trim();
+    document
+    .getElementById("lanDescricao")
+    .value
+    .trim();
+
 
     const valor =
-    Number(lanValor.value);
+    Number(
+        document
+        .getElementById("lanValor")
+        .value
+    );
+
 
     if(!descricao || !valor){
 
-        alert("Preencha descrição e valor.");
+        alert(
+            "Preencha descrição e valor."
+        );
 
         return;
 
@@ -1486,7 +1736,9 @@ function adicionarLancamento(){
     banco.lancamentos.push({
 
         data:
-        lanData.value ||
+        document
+        .getElementById("lanData")
+        .value ||
         new Date()
         .toISOString()
         .slice(0,10),
@@ -1494,21 +1746,34 @@ function adicionarLancamento(){
         descricao,
 
         categoria:
-        lanCategoria.value,
+        document
+        .getElementById("lanCategoria")
+        .value,
 
         tipo:
-        lanTipo.value,
+        document
+        .getElementById("lanTipo")
+        .value,
 
         pagamento:
-        lanPagamento.value,
+        document
+        .getElementById("lanPagamento")
+        .value,
 
         valor
 
     });
 
 
-    lanDescricao.value="";
-    lanValor.value="";
+    document
+    .getElementById("lanDescricao")
+    .value="";
+
+
+    document
+    .getElementById("lanValor")
+    .value="";
+
 
     salvar();
 
@@ -1518,7 +1783,9 @@ function adicionarLancamento(){
 function excluirLancamento(indice){
 
     if(
-        confirm("Excluir este lançamento?")
+        confirm(
+            "Excluir este lançamento?"
+        )
     ){
 
         banco.lancamentos.splice(
@@ -1540,13 +1807,25 @@ function excluirLancamento(indice){
 function adicionarContaPagar(){
 
     const descricao =
-    pagarDescricao.value.trim();
+    document
+    .getElementById("pagarDescricao")
+    .value
+    .trim();
+
 
     const valor =
-    Number(pagarValor.value);
+    Number(
+        document
+        .getElementById("pagarValor")
+        .value
+    );
+
 
     const vencimento =
-    pagarVencimento.value;
+    document
+    .getElementById("pagarVencimento")
+    .value;
+
 
     if(
         !descricao ||
@@ -1572,18 +1851,29 @@ function adicionarContaPagar(){
         vencimento,
 
         categoria:
-        pagarCategoria.value,
+        document
+        .getElementById("pagarCategoria")
+        .value,
 
         recorrente:
-        pagarRecorrente.value,
+        document
+        .getElementById("pagarRecorrente")
+        .value,
 
         pago:false
 
     });
 
 
-    pagarDescricao.value="";
-    pagarValor.value="";
+    document
+    .getElementById("pagarDescricao")
+    .value="";
+
+
+    document
+    .getElementById("pagarValor")
+    .value="";
+
 
     salvar();
 
@@ -1613,20 +1903,31 @@ function excluirContaPagar(indice){
 
 
 /* =====================================================
-                     CONTAS
+                    CONTAS
 ===================================================== */
 
 function adicionarConta(){
 
     const nome =
-    contaNome.value.trim();
+    document
+    .getElementById("contaNome")
+    .value
+    .trim();
+
 
     const saldo =
-    Number(contaSaldo.value) || 0;
+    Number(
+        document
+        .getElementById("contaSaldo")
+        .value
+    ) || 0;
+
 
     if(!nome){
 
-        alert("Informe o nome da conta.");
+        alert(
+            "Informe o nome da conta."
+        );
 
         return;
 
@@ -1638,19 +1939,34 @@ function adicionarConta(){
         nome,
 
         banco:
-        contaBanco.value,
+        document
+        .getElementById("contaBanco")
+        .value,
 
         tipo:
-        contaTipo.value,
+        document
+        .getElementById("contaTipo")
+        .value,
 
         saldo
 
     });
 
 
-    contaNome.value="";
-    contaBanco.value="";
-    contaSaldo.value="";
+    document
+    .getElementById("contaNome")
+    .value="";
+
+
+    document
+    .getElementById("contaBanco")
+    .value="";
+
+
+    document
+    .getElementById("contaSaldo")
+    .value="";
+
 
     salvar();
 
@@ -1676,15 +1992,25 @@ function excluirConta(indice){
 function adicionarCartao(){
 
     const nome =
-    cartaoNome.value.trim();
+    document
+    .getElementById("cartaoNome")
+    .value
+    .trim();
+
 
     const limite =
-    Number(cartaoLimite.value) || 0;
+    Number(
+        document
+        .getElementById("cartaoLimite")
+        .value
+    ) || 0;
 
 
     if(!nome){
 
-        alert("Informe o nome do cartão.");
+        alert(
+            "Informe o nome do cartão."
+        );
 
         return;
 
@@ -1698,16 +2024,31 @@ function adicionarCartao(){
         limite,
 
         fechamento:
-        Number(cartaoFechamento.value) || 0,
+        Number(
+            document
+            .getElementById("cartaoFechamento")
+            .value
+        ) || 0,
 
         vencimento:
-        Number(cartaoVencimento.value) || 0
+        Number(
+            document
+            .getElementById("cartaoVencimento")
+            .value
+        ) || 0
 
     });
 
 
-    cartaoNome.value="";
-    cartaoLimite.value="";
+    document
+    .getElementById("cartaoNome")
+    .value="";
+
+
+    document
+    .getElementById("cartaoLimite")
+    .value="";
+
 
     salvar();
 
@@ -1721,10 +2062,13 @@ function excluirCartao(indice){
         1
     );
 
+
     banco.compras =
     banco.compras.filter(
-        compra=>compra.cartao !== indice
+        compra=>
+        compra.cartao !== indice
     );
+
 
     salvar();
 
@@ -1734,16 +2078,34 @@ function excluirCartao(indice){
 function adicionarCompra(){
 
     const cartao =
-    Number(compraCartao.value);
+    Number(
+        document
+        .getElementById("compraCartao")
+        .value
+    );
+
 
     const valor =
-    Number(compraValor.value);
+    Number(
+        document
+        .getElementById("compraValor")
+        .value
+    );
+
 
     const parcelas =
-    Number(compraParcelas.value) || 1;
+    Number(
+        document
+        .getElementById("compraParcelas")
+        .value
+    ) || 1;
+
 
     const descricao =
-    compraDescricao.value.trim();
+    document
+    .getElementById("compraDescricao")
+    .value
+    .trim();
 
 
     if(
@@ -1766,7 +2128,9 @@ function adicionarCompra(){
         cartao,
 
         data:
-        compraData.value ||
+        document
+        .getElementById("compraData")
+        .value ||
         new Date()
         .toISOString()
         .slice(0,10),
@@ -1774,7 +2138,9 @@ function adicionarCompra(){
         descricao,
 
         categoria:
-        compraCategoria.value,
+        document
+        .getElementById("compraCategoria")
+        .value,
 
         valor,
 
@@ -1785,8 +2151,15 @@ function adicionarCompra(){
     });
 
 
-    compraDescricao.value="";
-    compraValor.value="";
+    document
+    .getElementById("compraDescricao")
+    .value="";
+
+
+    document
+    .getElementById("compraValor")
+    .value="";
+
 
     salvar();
 
@@ -1822,13 +2195,26 @@ function excluirCompra(indice){
 function adicionarMeta(){
 
     const nome =
-    metaNome.value.trim();
+    document
+    .getElementById("metaNome")
+    .value
+    .trim();
+
 
     const objetivo =
-    Number(metaObjetivo.value);
+    Number(
+        document
+        .getElementById("metaObjetivo")
+        .value
+    );
+
 
     const atual =
-    Number(metaAtual.value) || 0;
+    Number(
+        document
+        .getElementById("metaAtual")
+        .value
+    ) || 0;
 
 
     if(
@@ -1854,14 +2240,27 @@ function adicionarMeta(){
         atual,
 
         prazo:
-        metaPrazo.value
+        document
+        .getElementById("metaPrazo")
+        .value
 
     });
 
 
-    metaNome.value="";
-    metaObjetivo.value="";
-    metaAtual.value="";
+    document
+    .getElementById("metaNome")
+    .value="";
+
+
+    document
+    .getElementById("metaObjetivo")
+    .value="";
+
+
+    document
+    .getElementById("metaAtual")
+    .value="";
+
 
     salvar();
 
@@ -1884,7 +2283,10 @@ function excluirMeta(indice){
                     ORÇAMENTO
 ===================================================== */
 
-function alterarLimite(categoria,valor){
+function alterarLimite(
+    categoria,
+    valor
+){
 
     banco.limites[categoria] =
     Number(valor) || 0;
@@ -1895,29 +2297,50 @@ function alterarLimite(categoria,valor){
 
 
 /* =====================================================
-                  SIMULADOR
+                  INVESTIMENTOS
 ===================================================== */
 
 function simularInvestimento(){
 
     const inicial =
-    Number(simInicial.value) || 0;
+    Number(
+        document
+        .getElementById("simInicial")
+        .value
+    ) || 0;
+
 
     const aporte =
-    Number(simAporte.value) || 0;
+    Number(
+        document
+        .getElementById("simAporte")
+        .value
+    ) || 0;
+
 
     const taxa =
-    Number(simTaxa.value) / 100 || 0;
+    Number(
+        document
+        .getElementById("simTaxa")
+        .value
+    ) / 100 || 0;
+
 
     const meses =
-    Number(simMeses.value) || 1;
+    Number(
+        document
+        .getElementById("simMeses")
+        .value
+    ) || 1;
 
 
     let saldo =
     inicial;
 
+
     let aportado =
     inicial;
+
 
     let tabela="";
 
@@ -1931,9 +2354,11 @@ function simularInvestimento(){
         const rendimento =
         saldo * taxa;
 
+
         saldo +=
         rendimento +
         aporte;
+
 
         aportado +=
         aporte;
@@ -1943,14 +2368,22 @@ function simularInvestimento(){
 
         <tr>
 
-        <td>${mes}</td>
-
-        <td>${dinheiro(saldo)}</td>
-
-        <td>${dinheiro(aportado)}</td>
+        <td>
+        ${mes}
+        </td>
 
         <td>
-        ${dinheiro(saldo-aportado)}
+        ${dinheiro(saldo)}
+        </td>
+
+        <td>
+        ${dinheiro(aportado)}
+        </td>
+
+        <td>
+        ${dinheiro(
+            saldo-aportado
+        )}
         </td>
 
         </tr>
@@ -1960,16 +2393,29 @@ function simularInvestimento(){
     }
 
 
-    simAportado.innerText =
+    document
+    .getElementById("simAportado")
+    .innerText =
     dinheiro(aportado);
 
-    simRendimento.innerText =
-    dinheiro(saldo-aportado);
 
-    simFinal.innerText =
+    document
+    .getElementById("simRendimento")
+    .innerText =
+    dinheiro(
+        saldo-aportado
+    );
+
+
+    document
+    .getElementById("simFinal")
+    .innerText =
     dinheiro(saldo);
 
-    tabelaSimulacao.innerHTML =
+
+    document
+    .getElementById("tabelaSimulacao")
+    .innerHTML =
     tabela;
 
 }
@@ -2014,24 +2460,30 @@ function renderDashboard(){
 
     banco.lancamentos.forEach(l=>{
 
-        if(l.tipo==="Receita")
+        if(l.tipo==="Receita"){
             receitas+=l.valor;
+        }
 
-        if(l.tipo==="Despesa")
+        if(l.tipo==="Despesa"){
             despesas+=l.valor;
+        }
 
-        if(l.tipo==="Investimento")
+        if(l.tipo==="Investimento"){
             investimentos+=l.valor;
+        }
 
-        if(l.tipo==="Rendimento")
+        if(l.tipo==="Rendimento"){
             rendimentos+=l.valor;
+        }
 
     });
 
 
     const pagar =
     banco.pagar
-    .filter(c=>!c.pago)
+    .filter(
+        c=>!c.pago
+    )
     .reduce(
         (s,c)=>s+c.valor,
         0
@@ -2053,38 +2505,69 @@ function renderDashboard(){
     rendimentos;
 
 
-    dashReceitas.innerText =
+    document
+    .getElementById("dashReceitas")
+    .innerText =
     dinheiro(receitas);
 
-    dashDespesas.innerText =
+
+    document
+    .getElementById("dashDespesas")
+    .innerText =
     dinheiro(despesas);
 
-    dashInvestimentos.innerText =
+
+    document
+    .getElementById("dashInvestimentos")
+    .innerText =
     dinheiro(investimentos);
 
-    dashPagar.innerText =
+
+    document
+    .getElementById("dashPagar")
+    .innerText =
     dinheiro(pagar);
 
-    dashPatrimonio.innerText =
+
+    document
+    .getElementById("dashPatrimonio")
+    .innerText =
     dinheiro(patrimonio);
 
-    dashSaldo.innerText =
+
+    document
+    .getElementById("dashSaldo")
+    .innerText =
     dinheiro(saldo);
 
 
-    resReceitas.innerText =
+    document
+    .getElementById("resReceitas")
+    .innerText =
     dinheiro(receitas);
 
-    resDespesas.innerText =
+
+    document
+    .getElementById("resDespesas")
+    .innerText =
     dinheiro(despesas);
 
-    resInvestimentos.innerText =
+
+    document
+    .getElementById("resInvestimentos")
+    .innerText =
     dinheiro(investimentos);
 
-    resRendimentos.innerText =
+
+    document
+    .getElementById("resRendimentos")
+    .innerText =
     dinheiro(rendimentos);
 
-    resSaldo.innerText =
+
+    document
+    .getElementById("resSaldo")
+    .innerText =
     dinheiro(saldo);
 
 
@@ -2094,23 +2577,25 @@ function renderDashboard(){
     : 0;
 
 
-    document.getElementById(
-        "economia"
-    ).innerText =
+    document
+    .getElementById("economia")
+    .innerText =
     economia.toFixed(1)+"%";
 
 
-    quantidadeLanc.innerText =
+    document
+    .getElementById("quantidadeLanc")
+    .innerText =
     banco.lancamentos.length;
 
-
-    /* CATEGORIAS */
 
     const categoriasGastos={};
 
 
     banco.lancamentos
-    .filter(l=>l.tipo==="Despesa")
+    .filter(
+        l=>l.tipo==="Despesa"
+    )
     .forEach(l=>{
 
         categoriasGastos[l.categoria] =
@@ -2130,35 +2615,46 @@ function renderDashboard(){
     );
 
 
-    maiorCategoria.innerText =
+    document
+    .getElementById("maiorCategoria")
+    .innerText =
     listaCategorias.length
     ? listaCategorias[0][0]
     : "-";
 
 
+    const grafico =
+    document
+    .getElementById("graficoCategorias");
+
+
     if(!listaCategorias.length){
 
-        graficoCategorias.innerHTML =
+        grafico.innerHTML =
         `<div class="empty">
         Nenhuma despesa cadastrada.
         </div>`;
 
-    }else{
+    }
+    else{
 
         const maior =
         listaCategorias[0][1];
 
 
-        graficoCategorias.innerHTML =
+        grafico.innerHTML =
         listaCategorias
-        .map(([categoria,valor])=>`
+        .map(
+            ([categoria,valor])=>`
 
-            <div style="margin-bottom:14px">
+            <div
+            style="margin-bottom:14px">
 
-                <div style="
-                    display:flex;
-                    justify-content:space-between;
-                    margin-bottom:5px">
+                <div
+                style="
+                display:flex;
+                justify-content:space-between;
+                margin-bottom:5px">
 
                     <span>
                     ${categoria}
@@ -2172,24 +2668,24 @@ function renderDashboard(){
 
                 <div class="progress">
 
-                    <div style="
-                        width:${Math.min(
-                            100,
-                            valor/maior*100
-                        )}%">
+                    <div
+                    style="
+                    width:${Math.min(
+                        100,
+                        valor/maior*100
+                    )}%">
                     </div>
 
                 </div>
 
             </div>
 
-        `)
+            `
+        )
         .join("");
 
     }
 
-
-    /* AVISOS */
 
     const hoje =
     new Date();
@@ -2201,7 +2697,9 @@ function renderDashboard(){
 
     const proximas =
     banco.pagar
-    .filter(c=>!c.pago)
+    .filter(
+        c=>!c.pago
+    )
     .sort(
         (a,b)=>
         a.vencimento.localeCompare(
@@ -2211,41 +2709,47 @@ function renderDashboard(){
     .slice(0,5);
 
 
+    const avisos =
+    document
+    .getElementById("dashboardAvisos");
+
+
     if(!proximas.length){
 
-        dashboardAvisos.innerHTML =
+        avisos.innerHTML =
         `<div class="empty">
         Nenhuma conta pendente.
         </div>`;
 
-    }else{
+    }
+    else{
 
-        dashboardAvisos.innerHTML =
+        avisos.innerHTML =
         proximas
         .map(c=>{
 
             const data =
             new Date(
-                c.vencimento+"T00:00:00"
+                c.vencimento+
+                "T00:00:00"
             );
+
 
             const dias =
             Math.ceil(
-                (
-                    data-hoje
-                ) /
+                (data-hoje)/
                 86400000
             );
 
 
             let classe="";
-
             let texto;
 
 
             if(dias<0){
 
-                classe="alert-danger";
+                classe=
+                "alert-danger";
 
                 texto=
                 "Conta atrasada";
@@ -2267,7 +2771,8 @@ function renderDashboard(){
 
             return `
 
-            <div class="alert ${classe}">
+            <div
+            class="alert ${classe}">
 
                 <b>
                 ${c.descricao}
@@ -2279,9 +2784,14 @@ function renderDashboard(){
                 <br>
 
                 <small>
+
                 ${texto}
+
                 •
-                ${dataBR(c.vencimento)}
+                ${dataBR(
+                    c.vencimento
+                )}
+
                 </small>
 
             </div>
@@ -2297,21 +2807,23 @@ function renderDashboard(){
 
 
 /* =====================================================
-                TABELA LANÇAMENTOS
+                RENDER LANÇAMENTOS
 ===================================================== */
 
 function renderLancamentos(){
 
     const busca =
     (
-        document.getElementById(
+        document
+        .getElementById(
             "buscarLancamento"
         )?.value || ""
     ).toLowerCase();
 
 
     const filtro =
-    document.getElementById(
+    document
+    .getElementById(
         "filtroLancamento"
     )?.value || "";
 
@@ -2319,9 +2831,13 @@ function renderLancamentos(){
     const lista =
     banco.lancamentos
     .map(
-        (l,i)=>({...l,indice:i})
+        (l,i)=>({
+            ...l,
+            indice:i
+        })
     )
-    .filter(l=>
+    .filter(
+        l=>
         (
             !busca ||
             l.descricao
@@ -2337,14 +2853,26 @@ function renderLancamentos(){
     .reverse();
 
 
+    const tabela =
+    document
+    .getElementById(
+        "tabelaLancamentos"
+    );
+
+
     if(!lista.length){
 
-        tabelaLancamentos.innerHTML =
+        tabela.innerHTML =
         `<tr>
-        <td colspan="7"
+
+        <td
+        colspan="7"
         class="empty">
+
         Nenhum lançamento encontrado.
+
         </td>
+
         </tr>`;
 
         return;
@@ -2352,11 +2880,12 @@ function renderLancamentos(){
     }
 
 
-    tabelaLancamentos.innerHTML =
+    tabela.innerHTML =
     lista
-    .map(l=>`
+    .map(
+        l=>`
 
-    <tr>
+        <tr>
 
         <td>
         ${dataBR(l.data)}
@@ -2371,9 +2900,11 @@ function renderLancamentos(){
         </td>
 
         <td>
+
         <span class="pill">
         ${l.tipo}
         </span>
+
         </td>
 
         <td>
@@ -2388,7 +2919,10 @@ function renderLancamentos(){
 
         <button
         class="danger"
-        onclick="excluirLancamento(${l.indice})">
+        onclick="
+        excluirLancamento(
+            ${l.indice}
+        )">
 
         Excluir
 
@@ -2396,28 +2930,41 @@ function renderLancamentos(){
 
         </td>
 
-    </tr>
+        </tr>
 
-    `)
+        `
+    )
     .join("");
 
 }
 
 
 /* =====================================================
-                TABELA CONTAS PAGAR
+                CONTAS A PAGAR
 ===================================================== */
 
 function renderPagar(){
 
+    const tabela =
+    document
+    .getElementById(
+        "tabelaPagar"
+    );
+
+
     if(!banco.pagar.length){
 
-        tabelaPagar.innerHTML =
+        tabela.innerHTML =
         `<tr>
-        <td colspan="7"
+
+        <td
+        colspan="7"
         class="empty">
+
         Nenhuma conta cadastrada.
+
         </td>
+
         </tr>`;
 
         return;
@@ -2428,94 +2975,140 @@ function renderPagar(){
     const hoje =
     new Date();
 
-
     hoje.setHours(
         0,0,0,0
     );
 
 
-    tabelaPagar.innerHTML =
+    tabela.innerHTML =
     banco.pagar
-    .map((c,i)=>{
+    .map(
+        (c,i)=>{
 
-        const vencimento =
-        new Date(
-            c.vencimento+"T00:00:00"
-        );
-
-
-        const atrasada =
-        !c.pago &&
-        vencimento < hoje;
+            const vencimento =
+            new Date(
+                c.vencimento+
+                "T00:00:00"
+            );
 
 
-        const status =
-        c.pago
-        ? `<span class="status-paid">Paga</span>`
-        : atrasada
-        ? `<span class="status-late">Atrasada</span>`
-        : `<span class="status-pending">Pendente</span>`;
+            const atrasada =
+            !c.pago &&
+            vencimento<hoje;
 
 
-        return `
+            const status =
+            c.pago
 
-        <tr>
+            ? `<span
+            class="status-paid">
+            Paga
+            </span>`
 
-        <td>${c.descricao}</td>
+            : atrasada
 
-        <td>${c.categoria}</td>
+            ? `<span
+            class="status-late">
+            Atrasada
+            </span>`
 
-        <td>${dinheiro(c.valor)}</td>
+            : `<span
+            class="status-pending">
+            Pendente
+            </span>`;
 
-        <td>${dataBR(c.vencimento)}</td>
 
-        <td>${c.recorrente}</td>
+            return `
 
-        <td>${status}</td>
+            <tr>
 
-        <td>
+            <td>
+            ${c.descricao}
+            </td>
 
-        <button
-        class="secondary"
-        onclick="alternarPagamento(${i})">
+            <td>
+            ${c.categoria}
+            </td>
 
-        ${c.pago
-        ? "Desfazer"
-        : "Marcar paga"}
+            <td>
+            ${dinheiro(c.valor)}
+            </td>
 
-        </button>
+            <td>
+            ${dataBR(
+                c.vencimento
+            )}
+            </td>
 
-        <button
-        class="danger"
-        onclick="excluirContaPagar(${i})">
+            <td>
+            ${c.recorrente}
+            </td>
 
-        Excluir
+            <td>
+            ${status}
+            </td>
 
-        </button>
+            <td>
 
-        </td>
+            <button
+            class="secondary"
+            onclick="
+            alternarPagamento(
+                ${i}
+            )">
 
-        </tr>
+            ${
+                c.pago
+                ? "Desfazer"
+                : "Marcar paga"
+            }
 
-        `;
+            </button>
 
-    })
+            <button
+            class="danger"
+            onclick="
+            excluirContaPagar(
+                ${i}
+            )">
+
+            Excluir
+
+            </button>
+
+            </td>
+
+            </tr>
+
+            `;
+
+        }
+    )
     .join("");
 
 }
 
 
 /* =====================================================
-                     CONTAS
+                    CONTAS
 ===================================================== */
 
 function renderContas(){
 
+    const lista =
+    document
+    .getElementById(
+        "listaContas"
+    );
+
+
     if(!banco.contas.length){
 
-        listaContas.innerHTML =
+        lista.innerHTML =
         `<div class="empty">
+
         Nenhuma conta cadastrada.
+
         </div>`;
 
         return;
@@ -2523,45 +3116,59 @@ function renderContas(){
     }
 
 
-    listaContas.innerHTML =
+    lista.innerHTML =
     banco.contas
-    .map((c,i)=>`
+    .map(
+        (c,i)=>`
 
-    <div
-    class="card"
-    style="
-    margin-bottom:12px;
-    border-color:var(--azul-escuro)
-    ">
+        <div
+        class="card"
+        style="
+        margin-bottom:12px;
+        border-color:
+        var(--azul-escuro)">
 
-        <small>
-        ${c.tipo}
-        •
-        ${c.banco || "Sem banco"}
-        </small>
+            <small>
 
-        <strong>
-        ${c.nome}
-        </strong>
+            ${c.tipo}
 
-        <p>
-        Saldo:
-        <b>
-        ${dinheiro(c.saldo)}
-        </b>
-        </p>
+            •
 
-        <button
-        class="danger"
-        onclick="excluirConta(${i})">
+            ${c.banco || "Sem banco"}
 
-        Excluir
+            </small>
 
-        </button>
+            <strong>
 
-    </div>
+            ${c.nome}
 
-    `)
+            </strong>
+
+            <p>
+
+            Saldo:
+
+            <b>
+            ${dinheiro(c.saldo)}
+            </b>
+
+            </p>
+
+            <button
+            class="danger"
+            onclick="
+            excluirConta(
+                ${i}
+            )">
+
+            Excluir
+
+            </button>
+
+        </div>
+
+        `
+    )
     .join("");
 
 }
@@ -2573,8 +3180,16 @@ function renderContas(){
 
 function renderCartoes(){
 
-    compraCartao.innerHTML =
+    const select =
+    document
+    .getElementById(
+        "compraCartao"
+    );
+
+
+    select.innerHTML =
     banco.cartoes.length
+
     ? banco.cartoes
         .map(
             (c,i)=>
@@ -2583,16 +3198,26 @@ function renderCartoes(){
             </option>`
         )
         .join("")
+
     : `<option value="">
         Cadastre um cartão
        </option>`;
 
 
+    const lista =
+    document
+    .getElementById(
+        "listaCartoes"
+    );
+
+
     if(!banco.cartoes.length){
 
-        listaCartoes.innerHTML =
+        lista.innerHTML =
         `<div class="empty">
+
         Nenhum cartão cadastrado.
+
         </div>`;
 
         return;
@@ -2600,243 +3225,111 @@ function renderCartoes(){
     }
 
 
-    listaCartoes.innerHTML =
+    lista.innerHTML =
     banco.cartoes
-    .map((c,i)=>{
+    .map(
+        (c,i)=>{
 
-        const utilizado =
-        banco.compras
-        .filter(
-            x=>x.cartao===i &&
-            !x.pago
-        )
-        .reduce(
-            (s,x)=>
-            s+
-            x.valor/x.parcelas,
-            0
-        );
+            const utilizado =
+            banco.compras
+            .filter(
+                x=>
+                x.cartao===i &&
+                !x.pago
+            )
+            .reduce(
+                (s,x)=>
+                s+
+                x.valor/x.parcelas,
+                0
+            );
 
 
-        const disponivel =
-        c.limite-utilizado;
+            const disponivel =
+            c.limite-utilizado;
 
 
-        const porcentagem =
-        c.limite
-        ? Math.min(
-            100,
-            utilizado/c.limite*100
-        )
-        : 0;
+            const porcentagem =
+            c.limite
 
+            ? Math.min(
+                100,
+                utilizado/c.limite*100
+            )
 
-        return `
+            : 0;
 
-        <div
-        class="card"
-        style="
-        margin-bottom:12px;
-        border-color:var(--roxo)
-        ">
 
-            <small>
-            Fecha dia ${c.fechamento || "-"}
-            •
-            Vence dia ${c.vencimento || "-"}
-            </small>
+            return `
 
-            <strong>
-            ${c.nome}
-            </strong>
+            <div
+            class="card"
+            style="
+            margin-bottom:12px;
+            border-color:
+            var(--roxo)">
 
-            <p>
-            Limite:
-            ${dinheiro(c.limite)}
-            </p>
+                <small>
 
-            <p>
-            Utilizado:
-            ${dinheiro(utilizado)}
-            </p>
+                Fecha dia
+                ${c.fechamento || "-"}
 
-            <p>
-            Disponível:
-            <b>
-            ${dinheiro(disponivel)}
-            </b>
-            </p>
+                •
 
-            <div class="progress">
+                Vence dia
+                ${c.vencimento || "-"}
 
-                <div
-                style="
-                width:${porcentagem}%;
-                background:var(--roxo)
-                ">
-                </div>
+                </small>
 
-            </div>
+                <strong>
+                ${c.nome}
+                </strong>
 
-            <br>
+                <p>
 
-            <button
-            class="danger"
-            onclick="excluirCartao(${i})">
+                Limite:
 
-            Excluir
+                ${dinheiro(c.limite)}
 
-            </button>
+                </p>
 
-        </div>
+                <p>
 
-        `;
+                Utilizado:
 
-    })
-    .join("");
+                ${dinheiro(utilizado)}
 
-}
+                </p>
 
+                <p>
 
-function renderCompras(){
-
-    if(!banco.compras.length){
-
-        tabelaCompras.innerHTML =
-        `<tr>
-        <td colspan="8"
-        class="empty">
-        Nenhuma compra cadastrada.
-        </td>
-        </tr>`;
-
-        return;
-
-    }
-
-
-    tabelaCompras.innerHTML =
-    banco.compras
-    .map((c,i)=>{
-
-        const cartao =
-        banco.cartoes[c.cartao];
-
-
-        return `
-
-        <tr>
-
-        <td>
-        ${cartao
-        ? cartao.nome
-        : "Cartão removido"}
-        </td>
-
-        <td>
-        ${c.descricao}
-        </td>
-
-        <td>
-        ${c.categoria}
-        </td>
-
-        <td>
-        ${dinheiro(c.valor)}
-        </td>
-
-        <td>
-        ${c.parcelas}x
-        </td>
-
-        <td>
-        ${dinheiro(
-            c.valor/c.parcelas
-        )}
-        </td>
-
-        <td>
-
-        <button
-        class="secondary"
-        onclick="alternarCompra(${i})">
-
-        ${c.pago
-        ? "Pago"
-        : "Pendente"}
-
-        </button>
-
-        </td>
-
-        <td>
-
-        <button
-        class="danger"
-        onclick="excluirCompra(${i})">
-
-        Excluir
-
-        </button>
-
-        </td>
-
-        </tr>
-
-        `;
-
-    })
-    .join("");
-
-}
-
-
-/* =====================================================
-                       METAS
-===================================================== */
-
-function renderMetas(){
-
-    if(!banco.metas.length){
-
-        listaMetas.innerHTML =
-        `<div class="empty">
-        Nenhuma meta cadastrada.
-        </div>`;
-
-        return;
-
-    }
-
-
-    listaMetas.innerHTML =
-    banco.metas
-    .map((m,i)=>{
-
-        const porcentagem =
-        Math.min(
-            100,
-            m.objetivo
-            ? m.atual/m.objetivo*100
-            : 0
-        );
-
-
-        return `
-
-        <div class="panel">
-
-            <div style="
-            display:flex;
-            justify-content:space-between">
+                Disponível:
 
                 <b>
-                ${m.nome}
+                ${dinheiro(disponivel)}
                 </b>
+
+                </p>
+
+                <div class="progress">
+
+                    <div
+                    style="
+                    width:${porcentagem}%;
+                    background:
+                    var(--roxo)">
+                    </div>
+
+                </div>
+
+                <br>
 
                 <button
                 class="danger"
-                onclick="excluirMeta(${i})">
+                onclick="
+                excluirCartao(
+                    ${i}
+                )">
 
                 Excluir
 
@@ -2844,52 +3337,257 @@ function renderMetas(){
 
             </div>
 
-            <p>
+            `;
 
-            ${dinheiro(m.atual)}
+        }
+    )
+    .join("");
 
-            de
+}
 
-            ${dinheiro(m.objetivo)}
 
-            —
+function renderCompras(){
 
-            ${porcentagem.toFixed(1)}%
+    const tabela =
+    document
+    .getElementById(
+        "tabelaCompras"
+    );
 
-            </p>
 
-            <div class="progress">
+    if(!banco.compras.length){
+
+        tabela.innerHTML =
+        `<tr>
+
+        <td
+        colspan="8"
+        class="empty">
+
+        Nenhuma compra cadastrada.
+
+        </td>
+
+        </tr>`;
+
+        return;
+
+    }
+
+
+    tabela.innerHTML =
+    banco.compras
+    .map(
+        (c,i)=>{
+
+            const cartao =
+            banco.cartoes[c.cartao];
+
+
+            return `
+
+            <tr>
+
+            <td>
+
+            ${
+                cartao
+                ? cartao.nome
+                : "Cartão removido"
+            }
+
+            </td>
+
+            <td>
+            ${c.descricao}
+            </td>
+
+            <td>
+            ${c.categoria}
+            </td>
+
+            <td>
+            ${dinheiro(c.valor)}
+            </td>
+
+            <td>
+            ${c.parcelas}x
+            </td>
+
+            <td>
+
+            ${dinheiro(
+                c.valor/c.parcelas
+            )}
+
+            </td>
+
+            <td>
+
+            <button
+            class="secondary"
+            onclick="
+            alternarCompra(
+                ${i}
+            )">
+
+            ${
+                c.pago
+                ? "Pago"
+                : "Pendente"
+            }
+
+            </button>
+
+            </td>
+
+            <td>
+
+            <button
+            class="danger"
+            onclick="
+            excluirCompra(
+                ${i}
+            )">
+
+            Excluir
+
+            </button>
+
+            </td>
+
+            </tr>
+
+            `;
+
+        }
+    )
+    .join("");
+
+}
+
+
+/* =====================================================
+                    METAS
+===================================================== */
+
+function renderMetas(){
+
+    const lista =
+    document
+    .getElementById(
+        "listaMetas"
+    );
+
+
+    if(!banco.metas.length){
+
+        lista.innerHTML =
+        `<div class="empty">
+
+        Nenhuma meta cadastrada.
+
+        </div>`;
+
+        return;
+
+    }
+
+
+    lista.innerHTML =
+    banco.metas
+    .map(
+        (m,i)=>{
+
+            const porcentagem =
+            Math.min(
+                100,
+                m.objetivo
+                ? m.atual/m.objetivo*100
+                : 0
+            );
+
+
+            return `
+
+            <div class="panel">
 
                 <div
                 style="
-                width:${porcentagem}%;
-                background:var(--rosa)
-                ">
+                display:flex;
+                justify-content:
+                space-between">
+
+                    <b>
+                    ${m.nome}
+                    </b>
+
+                    <button
+                    class="danger"
+                    onclick="
+                    excluirMeta(
+                        ${i}
+                    )">
+
+                    Excluir
+
+                    </button>
+
                 </div>
+
+                <p>
+
+                ${dinheiro(m.atual)}
+
+                de
+
+                ${dinheiro(m.objetivo)}
+
+                —
+
+                ${porcentagem.toFixed(1)}%
+
+                </p>
+
+                <div class="progress">
+
+                    <div
+                    style="
+                    width:${porcentagem}%;
+                    background:
+                    var(--rosa)">
+                    </div>
+
+                </div>
+
+                <p
+                style="
+                color:var(--cinza)">
+
+                Falta:
+
+                ${dinheiro(
+                    Math.max(
+                        0,
+                        m.objetivo-m.atual
+                    )
+                )}
+
+                ${
+                    m.prazo
+                    ? " • Prazo: "+
+                      dataBR(m.prazo)
+                    : ""
+                }
+
+                </p>
 
             </div>
 
-            <p style="color:var(--cinza)">
+            `;
 
-            Falta:
-            ${dinheiro(
-                Math.max(
-                    0,
-                    m.objetivo-m.atual
-                )
-            )}
-
-            ${m.prazo
-            ? " • Prazo: "+dataBR(m.prazo)
-            : ""}
-
-            </p>
-
-        </div>
-
-        `;
-
-    })
+        }
+    )
     .join("");
 
 }
@@ -2901,87 +3599,99 @@ function renderMetas(){
 
 function renderOrcamento(){
 
-    tabelaOrcamento.innerHTML =
+    const tabela =
+    document
+    .getElementById(
+        "tabelaOrcamento"
+    );
+
+
+    tabela.innerHTML =
     categorias
-    .map(categoria=>{
+    .map(
+        categoria=>{
 
-        const gasto =
-        banco.lancamentos
-        .filter(
-            l=>
-            l.tipo==="Despesa" &&
-            l.categoria===categoria
-        )
-        .reduce(
-            (s,l)=>s+l.valor,
-            0
-        );
-
-
-        const limite =
-        banco.limites[categoria] || 0;
+            const gasto =
+            banco.lancamentos
+            .filter(
+                l=>
+                l.tipo==="Despesa" &&
+                l.categoria===categoria
+            )
+            .reduce(
+                (s,l)=>
+                s+l.valor,
+                0
+            );
 
 
-        const dentro =
-        !limite ||
-        gasto<=limite;
+            const limite =
+            banco.limites[categoria] || 0;
 
 
-        return `
+            const dentro =
+            !limite ||
+            gasto<=limite;
 
-        <tr>
 
-        <td>
-        ${categoria}
-        </td>
+            return `
 
-        <td>
+            <tr>
 
-        <input
-        type="number"
-        step="0.01"
-        value="${limite}"
-        onchange="
-        alterarLimite(
-            '${categoria}',
-            this.value
-        )">
+            <td>
+            ${categoria}
+            </td>
 
-        </td>
+            <td>
 
-        <td>
-        ${dinheiro(gasto)}
-        </td>
+            <input
+            type="number"
+            step="0.01"
+            value="${limite}"
+            onchange="
+            alterarLimite(
+                '${categoria}',
+                this.value
+            )">
 
-        <td style="
-        font-weight:bold;
-        color:${dentro
-        ? "var(--verde)"
-        : "var(--vermelho)"}
-        ">
+            </td>
 
-        ${
-            !limite
-            ? "Sem limite"
-            : dentro
-            ? "Dentro do limite"
-            : "LIMITE EXCEDIDO"
+            <td>
+            ${dinheiro(gasto)}
+            </td>
+
+            <td
+            style="
+            font-weight:bold;
+            color:${
+                dentro
+                ? 'var(--verde)'
+                : 'var(--vermelho)'
+            }">
+
+            ${
+                !limite
+                ? "Sem limite"
+                : dentro
+                ? "Dentro do limite"
+                : "LIMITE EXCEDIDO"
+            }
+
+            </td>
+
+            </tr>
+
+            `;
+
         }
-
-        </td>
-
-        </tr>
-
-        `;
-
-    })
+    )
     .join("");
 
 }
 
 
 /* =====================================================
-                     INICIALIZAÇÃO
+                    INICIALIZAÇÃO
 ===================================================== */
 
 preencherCategorias();
